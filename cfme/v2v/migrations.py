@@ -3,7 +3,8 @@ import csv
 
 from navmazing import NavigateToAttribute, NavigateToSibling
 from widgetastic.widget import Checkbox, View
-from widgetastic_manageiq import InfraMappingTreeView, MultiSelectList, RadioGroup, Table, HiddenFileInput
+from widgetastic_manageiq import (InfraMappingTreeView, MultiSelectList, RadioGroup,
+                                  Table, HiddenFileInput, MigrationDropdown)
 from widgetastic_patternfly import Text, TextInput, Button, BootstrapSelect
 
 from cfme.base.login import BaseLoggedInPage
@@ -221,6 +222,38 @@ class MigrationDashboardView(BaseLoggedInPage):
     create_infrastructure_mapping = Text(locator='(//a|//button)'
                                                  '[text()="Create Infrastructure Mapping"]')
     create_migration_plan = Text(locator='(//a|//button)[text()="Create Migration Plan"]')
+    migr_dropdown = MigrationDropdown(text="Migration Plans Not Started")
+    # TODO: declare list widget and in-progress widget
+
+    @View.nested
+    class plan_not_started(View):
+        # TODO: kk is going to add this widget
+        """
+            In test we can access it as,
+                view.migr_dropdown.item_select("Migration Plans Not Started")
+                view.plan_not_started.widget.widget_method()
+        """
+        pass
+
+    @View.nested
+    class plan_in_progress(View):
+        # TODO: in-progress widget
+        """
+            In test we can access it as,
+                view.migr_dropdown.item_select("Migration Plans in Progress")
+                view.plan_in_progress.widget.widget_method()
+        """
+        pass
+
+    @View.nested
+    class plan_completed(View):
+        # TODO: kk is going to add this widget
+        """
+            In test we can access it as,
+                view.migr_dropdown.item_select("Migration Plans Completed")
+                view.plan_completed.widget.widget_method()
+        """
+        pass
 
     @property
     def is_displayed(self):
