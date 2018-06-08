@@ -4,7 +4,7 @@ import csv
 from navmazing import NavigateToAttribute, NavigateToSibling
 from widgetastic.widget import Checkbox, View
 from widgetastic_manageiq import (InfraMappingTreeView, MultiSelectList, RadioGroup,
-                                  Table, HiddenFileInput, MigrationDropdown)
+                                  Table, HiddenFileInput, MigrationDropdown, MigrationPlansList)
 from widgetastic_patternfly import Text, TextInput, Button, BootstrapSelect
 
 from cfme.base.login import BaseLoggedInPage
@@ -48,6 +48,7 @@ class InfraMappingWizardClustersView(View):
 
     def fill(self, values):
         """Use to add all mappings specified in values.
+
         Args:
             values:
                 format as following:
@@ -82,6 +83,7 @@ class InfraMappingWizardDatastoresView(View):
 
     def fill(self, values):
         """Use to add all mappings specified in values.
+
         Args:
             values:
                 format as following:
@@ -122,6 +124,7 @@ class InfraMappingWizardNetworksView(View):
 
     def fill(self, values):
         """Use to add all mappings specified in values.
+
         Args:
             values:
                 format as following:
@@ -159,6 +162,7 @@ class InfraMappingWizardResultsView(View):
 
 class InfraMappingWizard(View):
     """Infrastructure Mapping Wizard Modal Widget.
+
     Usage:
         fill: takes values of following format:
             {
@@ -206,6 +210,7 @@ class InfraMappingWizard(View):
                 }
             }
     """
+
     title = Text(locator='.//h4[contains(@class,"modal-title")]')
     general = View.nested(InfraMappingWizardGeneralView)
     cluster = View.nested(InfraMappingWizardClustersView)
@@ -223,6 +228,9 @@ class MigrationDashboardView(BaseLoggedInPage):
                                                  '[text()="Create Infrastructure Mapping"]')
     create_migration_plan = Text(locator='(//a|//button)[text()="Create Migration Plan"]')
     migr_dropdown = MigrationDropdown(text="Migration Plans Not Started")
+    migration_plans_not_started_list = MigrationPlansList("plans-not-started-list")
+    migration_plans_completed_list = MigrationPlansList("plans-complete-list")
+
     # TODO: declare list widget and in-progress widget
 
     @View.nested
