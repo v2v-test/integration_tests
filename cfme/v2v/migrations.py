@@ -317,6 +317,7 @@ class AddMigrationPlanView(View):
 
 # Collections Entities
 
+
 @attr.s
 class InfrastructureMapping(BaseEntity):
     """Class representing v2v infrastructure mappings"""
@@ -364,6 +365,8 @@ class MigrationPlanCollection(BaseCollection):
             start_migration: (bool) flag for start migration
         """
         view = navigate_to(self, 'Add')
+        import time
+        time.sleep(2)
         view.general.fill({
             'infra_map': infra_map,
             'name': name,

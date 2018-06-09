@@ -91,7 +91,7 @@ def test_migration_plan_modal(appliance, infra_map, vm_list, method, migration_f
         csv_import = True
     else:
         csv_import = False
-    coll = appliance.collections.migration_plan
+    coll = appliance.collections.v2v_plans
     coll.create(name="plan_{}".format(fauxfactory.gen_alphanumeric()),
                 description="desc_{}".format(fauxfactory.gen_alphanumeric()),
                 infra_map=infra_map.name,
